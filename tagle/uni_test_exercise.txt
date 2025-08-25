@@ -1,0 +1,40 @@
+1. Function that checks if a given number is positive, negative, or zero.
+
+def check_number(n):
+    return "positive" if n > 0
+else "negative" n < 0 else
+
+print(check_number(5))
+
+print(check_number(-3))
+
+print(check_number)
+
+
+2. Function that validates user passwords.
+
+The password validation rules are as follows:
+ - The password must be at least 8 characters long.
+ - The password must contain at least one uppercase letter,
+   one lowercase letter, one digit,
+   and one special character (!, @, #, $, %, or &).
+
+import re
+validar = lambda p: len(p) >= 8 and all(re.search(pat, p) for pat in [r'[A-Z]', r'[a-z]', r'\d', r'[!@#$%&]'])
+print(validar_password("MiPass123!")) 
+print(validar_password("debil"))      
+
+3. Function that calculates the discount for a customer's purchase based on the total amount.
+The discount rules are as follows:
+
+If the total amount is less than 100, no discount is applied.
+If the total amount is between 100 and 500 (inclusive), a 10% discount is applied.
+If the total amount is greater than 500, a 20% discount is applied.
+
+
+def calcular_descuento(total):
+    return 0 if total < 100 else total * 0.1 if total <= 500 else total * 0.2
+
+print(calcular_descuento(50))  
+print(calcular_descuento(300)) 
+print(calcular_descuento(600)) 
