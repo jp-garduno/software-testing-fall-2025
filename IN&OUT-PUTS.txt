@@ -1,0 +1,21 @@
+3. Function that calculates the discount for a customer's purchase based on the total amount.
+The discount rules are as follows:
+
+If the total amount is less than 100, no discount is applied.
+If the total amount is between 100 and 500 (inclusive), a 10% discount is applied.
+If the total amount is greater than 500, a 20% discount is applied.
+
+Input:
+90
+Output:
+90
+
+Input:
+125
+Output:
+112.5
+
+Input:
+870
+Output:
+696
