@@ -1,0 +1,10 @@
+3. Function that calculates the discount for a customer's purchase based on the total amount.
+The discount rules are as follows:
+
+VALUE               PERCENTAGE OF DISCOUNT              VALIDATION 
+99.99               0                                   Valid 
+100                 10%                                 Valid
+500                 10%                                 Valid
+500.01              20%                                 Valid
+-0.01               NA                                  No valid
+NULL                NA                                  No valid
