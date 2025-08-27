@@ -1,0 +1,27 @@
+3. Function that calculates the discount for a customer's purchase based on the total amount.
+The discount rules are as follows:
+
+def calc_discount(x):
+    return discount
+
+If the total amount is less than 100, no discount is applied.
+
+x == 99.9999.... No discount
+x == 0 No discount
+
+If the total amount is between 100 and 500 (inclusive), a 10% discount is applied.
+
+x == 100 10% discount
+x == 500 10% discount
+
+If the total amount is greater than 500, a 20% discount is applied.
+
+x == 500.0000001..... 20% discount
+x == 9999999......... 20% discount
+
+Special cases
+
+x is a STR No discount/Error
+x is a Bool No discount/Error
+x is a -NUM No discount/Error
+x is NONE No discount/Error
