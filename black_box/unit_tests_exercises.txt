@@ -1,5 +1,6 @@
 1. Function that checks if a given number is positive, negative, or zero.
 
+
 2. Function that validates user passwords.
 The password validation rules are as follows:
 
@@ -8,12 +9,14 @@ The password must contain at least one uppercase letter,
 one lowercase letter, one digit,
 and one special character (!, @, #, $, %, or &).
 
+
 3. Function that calculates the discount for a customer's purchase based on the total amount.
 The discount rules are as follows:
 
 If the total amount is less than 100, no discount is applied.
 If the total amount is between 100 and 500 (inclusive), a 10% discount is applied.
 If the total amount is greater than 500, a 20% discount is applied.
+
 
 4. Function that processes user orders in an e-commerce system.
 The function calculates the total price of the items in the order,
@@ -23,6 +26,7 @@ The discount rules are as follows:
 If the quantity of a single item is between 1 and 5 (inclusive), no discount is applied.
 If the quantity of a single item is between 6 and 10 (inclusive), a 5% discount is applied.
 If the quantity of a single item is greater than 10, a 10% discount is applied.
+
 
 5. Function that calculates shipping costs for an online shopping system.
 The function calculates shipping costs based on the total weight of the items
