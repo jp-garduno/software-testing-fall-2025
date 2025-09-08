@@ -4,9 +4,10 @@ import { defineConfig } from "eslint/config";
 
 export default defineConfig([
   {
+    ...js.configs.recommended, // esto incluye reglas y plugins
     files: ["**/*.{js,mjs,cjs}"],
-    plugins: { js },
-    extends: ["js/recommended"],
-    languageOptions: { globals: globals.browser },
+    languageOptions: {
+      globals: globals.browser,
+    },
   },
 ]);
