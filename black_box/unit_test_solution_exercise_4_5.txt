@@ -21,7 +21,7 @@ STANDARD
 - 5.01	$15
 - 10	$15
 - 10.01 $20
-- 20 	$20	
+- 20 	$20
 EXPRESS
 - 0	$20
 - 5 	$20 (considerando el orden de las condiciones)
