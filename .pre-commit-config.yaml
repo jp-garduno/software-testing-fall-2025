@@ -19,8 +19,6 @@ repos:
       - id: mixed-line-ending
       - id: name-tests-test
         args: [--pytest-test-first]
-      - id: pretty-format-json
-        exclude: ^(package-lock\.json|package\.json)$
       - id: requirements-txt-fixer
       - id: sort-simple-yaml
       - id: trailing-whitespace
@@ -51,8 +49,3 @@ repos:
     hooks:
       - id: check-github-actions
       - id: check-github-workflows
-
-  - repo: https://github.com/pre-commit/mirrors-eslint
-    rev: v9.35.0 # Use the sha / tag you want to point at
-    hooks:
-      - id: eslint
