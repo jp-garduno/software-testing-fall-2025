@@ -1,0 +1,46 @@
+1. Function that checks if a given number is positive, negative, or zero.
+
+Input: 0 = Output = "Zero"
+Input: 5 = Output = "Positive"
+Input: -5 = Output = "Negative"
+Input: 999999 = Output = "Positive"
+Input: -999999  = Output = "Negative"
+Input: 0.0001 = Output = "Positive"
+Input: -0.0001 = Output = "Negative"
+Input: "abc" = Output = Error / Entrada invalida
+Input: None = Output = Error / Entrada invalida
+
+2. Function that validates user passwords.
+
+Input: "Password1!" = Output = Valido
+Input: "pass" = Output = Invalido
+Input: "password1!" = Output = Invalido
+Input: "PASSWORD1!" = Output = Invalido
+Input: "Password!" = Output = Invalido
+Input: "Password1" = Output = Invalido
+Input: "Passw1!" = Output = Invalido
+Input: "Password1@" = Output = Valido
+Input: "Password1#" = Output = Valido
+Input: "Password1$" = Output = Valido
+Input: "Password1%" = Output = Valido
+Input: "Password1&" = Output = Valido
+Input: "12345678" = Output = Invalido
+Input: "abcdefgh" = Output = Invalido
+Input: "ABCDEFGH" = Output = Invalido
+Input: None = Output = Error / Entrada invalida
+Input: "" = Output = Error / Entrada invalida
+
+3. Function that calculates the discount for a customer's purchase based on the total amount.
+
+Input: 0 = Output = 0
+Input: 50 = Output = 50
+Input: 99.99 = Output = 99.99
+Input: 100 = Output = 90
+Input: 150 = Output = 135
+Input: 500 = Output = 450
+Input: 500.01 = Output = 400.01
+Input: 999.99 = Output = 800
+Input: 100000 = Output = 80000
+Input: -1 = Output = Error / Entrada invalida
+Input: "200" = Output = Error / Entrada invalida
+Input: None = Output = Error / Entrada invalida
