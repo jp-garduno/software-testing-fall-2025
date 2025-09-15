@@ -1,4 +1,14 @@
 1. Function that checks if a given number is positive, negative, or zero.
+    - number = 0 -> zero
+    - number = 5 -> positive
+    - number = -5 -> negative
+    - number = 0.001 -> positive
+    - number = -0.001 -> negative
+    - number = float('inf') -> positive
+    - number = -float('inf') -> negative
+    - number = 'hola -> error
+    - number = True/False -> error
+    - number = null -> error
 
 2. Function that validates user passwords.
 The password validation rules are as follows:
@@ -8,12 +18,36 @@ The password must contain at least one uppercase letter,
 one lowercase letter, one digit,
 and one special character (!, @, #, $, %, or &).
 
+    - password = 'holA123@' -> True
+    - password = 'holA12@' -> False
+    - password = 'hola123@' -> False
+    - password = 'HOLA123@' -> False
+    - password = 'HOlA123@' -> True
+    - password = '' -> False
+    - password = '12345678' -> False
+    - password = '1234567@' -> False
+    - password = 'holacoComOestas' -> False
+    - password = '' -> False
+    - password = '@@@hola@' -> False
+
 3. Function that calculates the discount for a customer's purchase based on the total amount.
 The discount rules are as follows:
 
 If the total amount is less than 100, no discount is applied.
 If the total amount is between 100 and 500 (inclusive), a 10% discount is applied.
 If the total amount is greater than 500, a 20% discount is applied.
+
+    - total_amount = 0 -> 0%
+    - total_amount = 70 -> 0%
+    - total_amount = 99.999 -> 0%
+    - total_amount = 100 -> 10%
+    - total_amount = 250 -> 10%
+    - total_amount = 500 -> 10%
+    - total_amount = 500.001 -> 20%
+    - total_amount = 550 -> 20%
+    - total_amount = '550' -> error
+    - total_amount = True -> error
+    - total_amount = null -> error
 
 4. Function that processes user orders in an e-commerce system.
 The function calculates the total price of the items in the order,
@@ -23,6 +57,20 @@ The discount rules are as follows:
 If the quantity of a single item is between 1 and 5 (inclusive), no discount is applied.
 If the quantity of a single item is between 6 and 10 (inclusive), a 5% discount is applied.
 If the quantity of a single item is greater than 10, a 10% discount is applied.
+
+    - items = [{price: 10, quantity: 1}] -> 0%
+    - items = [{price: 10, quantity: 5}] -> 0%
+    - items = [{price: 10, quantity: 6}] -> 5%
+    - items = [{price: 10, quantity: 10}] -> 5%
+    - items = [{price: 10, quantity: 11}] -> 10%
+    - items = [{price: 100, quantity: 20}] -> 10%
+    - items = [{price: 10, quantity: 3}, {price: 20, quantity: 7}] -> 5%
+    - items = [{price: 15.5, quantity: 6}] -> 5%
+    - items = [] -> 0%
+    - items = [{price: 10, quantity: '5'}] -> error
+    - items = [{price: 10, quantity: True}] -> error
+    - items = [{price: 10, quantity: null}] -> error
+    - items = null -> error
 
 5. Function that calculates shipping costs for an online shopping system.
 The function calculates shipping costs based on the total weight of the items
@@ -34,8 +82,29 @@ For standard shipping:
 If the total weight is less than or equal to 5 kg, the cost is $10.
 If the total weight is between 5 and 10 kg (inclusive), the cost is $15.
 If the total weight is greater than 10 kg, the cost is $20.
+
 For express shipping:
 
 If the total weight is less than or equal to 5 kg, the cost is $20.
 If the total weight is between 5 and 10 kg (inclusive), the cost is $30.
 If the total weight is greater than 10 kg, the cost is $40.
+
+    - shipping_method = "standard", weight = 0 → $10
+    - shipping_method = "standard", weight = 5 → $10
+    - shipping_method = "standard", weight = 5.001 → $15
+    - shipping_method = "standard", weight = 10 → $15
+    - shipping_method = "standard", weight = 10.001 → $20
+    - shipping_method = "standard", weight = 50 → $20
+    - shipping_method = "express", weight = 0 → $20
+    - shipping_method = "express", weight = 5 → $20
+    - shipping_method = "express", weight = 5.001 → $30
+    - shipping_method = "express", weight = 10 → $30
+    - shipping_method = "express", weight = 10.001 → $40
+    - shipping_method = "express", weight = 50 → $40
+    - shipping_method = "standard", weight = -1 → error
+    - shipping_method = "express", weight = -5 → error
+    - shipping_method = "standard", weight = "10" → error
+    - shipping_method = "express", weight = True → error
+    - shipping_method = "standard", weight = null → error
+    -w shipping_method = "premium" (método inválido), weight = 5 → error
+    - shipping_method = null, weight = 5 → error
