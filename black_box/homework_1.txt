@@ -1,0 +1,121 @@
+Equivalence Partitioning
+
+1. Function that validates credit card numbers.
+   - Valid card numbers: Length between 13 and 16 digits, containing only numeric digits.
+   x < 13 Invalid
+   x > 16 Invalid
+   x contains letters Invalid
+   x >= 13 and x <= 16 Valid
+
+2. Function that validates dates.
+   - Valid years: Between 1900 and 2100.
+   - Valid months: Between 1 and 12.
+   - Valid days: Between 1 and 31.
+   Y < 1900 Invalid
+   Y > 2100 Invalid
+   1900 >= Y <= 2100 Valid
+
+   M < 1 Invalid
+   M > 12 Invalid
+   1 >= Month <= 12 Valid
+
+   D < 1 Invalid
+   D > 31 Invalid
+   1 >= Day <= 31 Valid
+
+3. Function that checks the eligibility of a passenger to book a flight.
+   - Eligible ages: Between 18 and 65.
+   - Frequent flyers: True or False.
+   Age < 18 Invalid
+   Age > 65 Invalid
+   18 >= Age <= 65 Valid (Frequent flyer can be True or False)
+
+4. Function that validates URLs.
+   - Valid URLs: Length less than or equal to 255, starting with "http://" or "https://".
+   Length > 255 Invalid
+   Does not start with "http://" or "https://" Invalid
+   Length ≤ 255 and starts with "http://" or "https://" Valid
+
+Boundary Value Analysis
+
+1. Function that calculates the eligibility of a person for a loan based on their income and credit score.
+   The eligibility rules are as follows:
+   - If the income is less than $30,000, the person is not eligible for a loan.
+   - If the income is between $30,000 and $60,000 (inclusive) and the credit score is above 700, the person is eligible for a standard loan.
+   - If the income is between $30,000 and $60,000 (inclusive) and the credit score is below or equal to 700, the person is eligible for a secured loan.
+   - If the income is greater than $60,000 and the credit score is above 750, the person is eligible for a premium loan.
+   - If the income is greater than $60,000 and the credit score is between 700 and 750 (inclusive), the person is eligible for a standard loan.
+   Income < 30,000 → Not eligible
+
+   30,000 >= Income <= 60,000 AND Credit > 700 Standard loan
+   30,000 >= Income <= 60,000 AND Credit <= 700 Secured loan
+
+   Income > 60,000 AND Credit > 750 Premium loan
+   Income > 60,000 AND credit >= 700 AND credit <= 750 Standard loan
+
+2. Function that determines the category of a product in an e-commerce system based on its price.
+   The product categories and pricing rules are as follows:
+   - Category A: Products priced between $10 and $50 (inclusive).
+   - Category B: Products priced between $51 and $100 (inclusive).
+   - Category C: Products priced between $101 and $200 (inclusive).
+   - Category D: Products priced above $200.
+   Price < 10 No category (Invalid/Out of range)
+   10 >= Price <= 50 Category A
+   51 >= Price <= 100 Category B
+   101 >= Price <= 200 Category C
+   Price > 200 Category D
+
+3. Function that calculates the cost of shipping for packages based on their weight and dimensions.
+   The shipping cost rules are as follows:
+   - If the weight of the package is less than or equal to 1 kg and the dimensions (length, width, and height) are each less than or equal to 10 cm, the cost is $5.
+   - If the weight is between 1 and 5 kg (inclusive) and the dimensions are each between 11 and 30 cm (inclusive), the cost is $10.
+   - If the weight is greater than 5 kg or any of the dimensions is greater than 30 cm, the cost is $20.
+   Weight <= 1 kg AND all dimensions <= 10 cm $5
+
+   Weight > 1 AND Weight <= 5 AND all dimensions > 10 cm AND dimension <= 30 cm $10
+
+   Weight > 5 kg OR any dimension > 30 cm $20
+
+Decision Table
+
+1. Create the decision table for a system that provides weather advisories based on temperature and humidity.
+   The rules are:
+   - Weather recommendation "High temperature and humidity. Stay hydrated." for temperature > 30 and humidity > 70.
+   - Weather recommendation "Low temperature. Don't forget your jacketA 3!" for temperature < 0 and any humidity.
+   - No weather recommendation for any other temperature and humidity combination.
+
+   Condition   temperature high > 30    temperature low < 0    humidity High > 70   Advisory
+   R1          yes                      no                     yes                  High temperature and humidity. Stay hydrated.
+   R2          no                       yes                    any                  Low temperature. Don't forget your Jacket
+   R3          no                       no                     any                  No advisory
+
+2. Create the decision table for a system that authenticates users based on their username and password.
+   The rules are:
+   - Returns "Admin" for username "admin" and password "admin123".
+   - Returns "User" for any other username with at least 5 characters and password with at least 8 characters.
+   - Returns "Invalid" if the username or password lenghts are not met.
+
+   Condition   Username = Admin   username length > 4   password is admin123   password length > 7   Result
+   R1          yes                -                     yes                    -                     Admin
+   R2          no                 yes                   no                     yes                   User
+   R3          any                no                    any                    any                   Invalid
+   R4          any                any                   any                    no                    Invalid
+
+State Transition
+
+1. Draw the state transition diagram for a simple vending machine that dispenses drinks.
+   - It has two states: "Ready" and "Dispensing".
+   - Goes from Ready to Dispensing when inserting a coin and asks you to select the drink.
+   - After selecting the drink, thanks you and goes from Dispensing to Ready.
+
+   [Ready] -- insert coin --> [Dispensing] -- select drink/thank you --> [Ready]
+
+2. Draw the state transition diagram for an elevator system.
+   - The states are "Idle", "Moving Up" and "Moving Down".
+   - The elevator can only move up or down if the state is in "Idle" state.
+   - The elevator can only stop if the state is either "Moving Down" or "Moving Up"
+
+   State = Idle AND Command up -> State changes to Moving Up
+   State = Idle AND Command down -> State changes to Moving Down
+   State = Moving Up AND Arrive/stop -> State changes to Idle
+   State = Moving Down AND Arrive/stop -> State changes to Idle
