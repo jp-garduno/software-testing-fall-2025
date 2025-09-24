@@ -123,6 +123,52 @@ class TestCheckNumberStatus(unittest.TestCase):
         Checks positive odd number.
         """
         self.assertEqual(check_number_status(7), "Positive")
+class TestWhiteBoxCheckNumberStatus(unittest.TestCase):
+    """
+    Check Number Status unit tests.
+    """
+
+    def test_check_number_status_positive(self):
+        """
+        Checks if a positive number is correctly identified.
+        """
+        self.assertEqual(check_number_status(5), "Positive")
+
+    def test_check_number_status_negative(self):
+        """
+        Checks if a negative number is correctly identified.
+        """
+        self.assertEqual(check_number_status(-3), "Negative")
+
+    def test_check_number_status_zero(self):
+        """
+        Checks if zero is correctly identified.
+        """
+        self.assertEqual(check_number_status(0), "Zero")
+
+    def test_check_number_status_positive_decimal(self):
+        """
+        Checks if a positive decimal number is correctly identified.
+        """
+        self.assertEqual(check_number_status(2.5), "Positive")
+
+    def test_check_number_status_negative_decimal(self):
+        """
+        Checks if a negative decimal number is correctly identified.
+        """
+        self.assertEqual(check_number_status(-1.7), "Negative")
+
+    def test_check_number_status_positive_large_number(self):
+        """
+        Checks if a large positive number is correctly identified.
+        """
+        self.assertEqual(check_number_status(float("inf")), "Positive")
+
+    def test_check_number_status_negative_large_number(self):
+        """
+        Checks if a large negative number is correctly identified.
+        """
+        self.assertEqual(check_number_status(-float("inf")), "Negative")
 
 
 class TestValidatePassword(unittest.TestCase):
@@ -159,6 +205,51 @@ class TestValidatePassword(unittest.TestCase):
         Checks valid password.
         """
         self.assertTrue(validate_password("Valid1Password!"))
+        """
+        Validate Password unit tests.
+        """
+
+    def test_password_length_less_than_8(self):
+        """
+        Checks if a password's length is less than 8
+        """
+        self.assertEqual(validate_password("1234#Ab"), False)
+
+    def test_password_length_equal_to_8(self):
+        """
+        Checks if a password's length is equal to 8
+        """
+        self.assertEqual(validate_password("1234#Abc"), True)
+
+    def test_password_length_more_than_8(self):
+        """
+        Checks if a password's length is more than 8
+        """
+        self.assertEqual(validate_password("1234#Abcd"), True)
+
+    def test_password_missing_uppercase(self):
+        """
+        Checks if a password without uppercase letter is invalid
+        """
+        self.assertEqual(validate_password("1234#abc"), False)
+
+    def test_password_missing_lowercase(self):
+        """
+        Checks if a password without lowercase letter is invalid
+        """
+        self.assertEqual(validate_password("1234#ABC"), False)
+
+    def test_password_missing_digit(self):
+        """
+        Checks if a password without digit is invalid
+        """
+        self.assertEqual(validate_password("abcd#Abc"), False)
+
+    def test_password_missing_special_char(self):
+        """
+        Checks if a password without special character is invalid
+        """
+        self.assertEqual(validate_password("1234Abcd"), False)
 
 
 class TestCalculateTotalDiscount(unittest.TestCase):
@@ -189,6 +280,51 @@ class TestCalculateTotalDiscount(unittest.TestCase):
         Checks 20 percent discount applied.
         """
         self.assertEqual(calculate_total_discount(501), 100.2)
+        """
+        Calculate Total Discount unit tests.
+        """ 
+
+    def test_total_amount_less_than_100(self):
+        """
+        Checks if no discount is applied when total amount is less than 100.
+        """
+        self.assertEqual(calculate_total_discount(50), 0)
+
+    def test_total_amount_less_than_100_frontier(self):
+        """
+        Checks if no discount is applied when total amount is 99 (boundary value).
+        """
+        self.assertEqual(calculate_total_discount(99), 0)
+
+    def test_total_amount_equals_100(self):
+        """
+        Checks if 10% discount is applied when total amount equals 100.
+        """
+        self.assertEqual(calculate_total_discount(100), 0.1 * 100)
+
+    def test_total_amount_more_than_100(self):
+        """
+        Checks if 10% discount is applied when total amount is between 100 and 500.
+        """
+        self.assertEqual(calculate_total_discount(300), 0.1 * 300)
+
+    def test_total_amount_equals_500(self):
+        """
+        Checks if 10% discount is applied when total amount equals 500.
+        """
+        self.assertEqual(calculate_total_discount(500), 0.1 * 500)
+
+    def test_total_amount_more_than_500_frontier(self):
+        """
+        Checks if 20% discount is applied when total amount is 501 (boundary value).
+        """
+        self.assertEqual(calculate_total_discount(501), 0.2 * 501)
+
+    def test_total_amount_more_than_500(self):
+        """
+        Checks if 20% discount is applied when total amount is greater than 500.
+        """
+        self.assertEqual(calculate_total_discount(600), 0.2 * 600)
 
 
 class TestWhiteBoxVendingMachine(unittest.TestCase):
