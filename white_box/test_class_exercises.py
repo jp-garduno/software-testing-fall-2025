@@ -6,6 +6,7 @@ White-box unit testing examples.
 import unittest
 
 from white_box.class_exercises import (
+    TrafficLight,
     VendingMachine,
     calculate_total_discount,
     check_number_status,
@@ -278,3 +279,48 @@ class TestWhiteBoxVendingMachine(unittest.TestCase):
 
         self.assertEqual(self.vending_machine.state, "Dispensing")
         self.assertEqual(output, "Coin Inserted. Select your drink.")
+
+
+class TestTrafficLight(unittest.TestCase):
+    """
+    Traffic Light unit tests.
+    """
+
+    def setUp(self):
+        """
+        Set up a new TrafficLight instance for each test.
+        """
+        self.traffic_light = TrafficLight()
+
+    def test_get_state(self):
+        """
+        Checks if the get_current_state function works correctly.
+        """
+        state = self.traffic_light.get_current_state()
+        self.assertEqual(state, "Red")
+
+    def test_change_from_red(self):
+        """
+        Checks if the state changes from red to green correctly.
+        """
+        self.traffic_light.change_state()
+        state = self.traffic_light.get_current_state()
+        self.assertEqual(state, "Green")
+
+    def test_change_from_green(self):
+        """
+        Checks if the state changes from green to yellow correctly.
+        """
+        self.traffic_light.state = "Green"
+        self.traffic_light.change_state()
+        state = self.traffic_light.get_current_state()
+        self.assertEqual(state, "Yellow")
+
+    def test_change_from_yellow(self):
+        """
+        Checks if the state changes from yellow to red correctly.
+        """
+        self.traffic_light.state = "Yellow"
+        self.traffic_light.change_state()
+        state = self.traffic_light.get_current_state()
+        self.assertEqual(state, "Red")
