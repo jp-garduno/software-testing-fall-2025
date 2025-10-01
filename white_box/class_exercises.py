@@ -565,7 +565,10 @@ class BankingSystem:
         """
         Mock users.
         """
-        self.users = {"user123": "pass123"}  # Simplified user database
+        self.users = {
+            "user123": "pass123",
+            "user2": "pass123",
+        }  # Simplified user database
         self.logged_in_users = set()
 
     def authenticate(self, username, password):
