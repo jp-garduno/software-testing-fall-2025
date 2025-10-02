@@ -6,12 +6,17 @@ White-box unit testing examples.
 import unittest
 
 from white_box.class_exercises import (
+    BankingSystem,
+    Product,
+    ShoppingCart,
     VendingMachine,
     divide,
     get_grade,
     is_even,
     is_triangle,
 )
+
+# pylint: disable=missing-function-docstring,unused-import
 
 
 class TestWhiteBox(unittest.TestCase):
@@ -131,3 +136,88 @@ class TestWhiteBoxVendingMachine(unittest.TestCase):
 
         self.assertEqual(self.vending_machine.state, "Dispensing")
         self.assertEqual(output, "Coin Inserted. Select your drink.")
+
+
+class TestWhiteBoxBankingSystem(unittest.TestCase):
+    """
+    Unit tests for BankAccount and BankingSystem (exercise 27).
+    """
+
+    def setUp(self):
+        self.system = BankingSystem()
+
+    def test_authenticate_success(self):
+        result = self.system.authenticate("user123", "pass123")
+        self.assertTrue(result)
+        self.assertIn("user123", self.system.logged_in_users)
+
+    def test_authenticate_failure(self):
+        result = self.system.authenticate("user123", "wrongpass")
+        self.assertFalse(result)
+
+    def test_authenticate_already_logged_in(self):
+        self.system.authenticate("user123", "pass123")
+        result = self.system.authenticate("user123", "pass123")
+        self.assertFalse(result)  # porque ya estaba logeado
+
+    def test_transfer_without_login(self):
+        result = self.system.transfer_money("user123", "receiver", 100, "regular")
+        self.assertFalse(result)
+
+    def test_transfer_invalid_type(self):
+        self.system.authenticate("user123", "pass123")
+        result = self.system.transfer_money("user123", "receiver", 100, "fast")
+        self.assertFalse(result)
+
+    def test_transfer_regular_fee_success(self):
+        self.system.authenticate("user123", "pass123")
+        result = self.system.transfer_money("user123", "receiver", 100, "regular")
+        self.assertTrue(result)
+
+    def test_transfer_insufficient_funds(self):
+        self.system.authenticate("user123", "pass123")
+        result = self.system.transfer_money("user123", "receiver", 2000, "express")
+        self.assertFalse(result)
+
+
+class TestWhiteBoxShoppingCart(unittest.TestCase):
+    """
+    Unit tests for Product and ShoppingCart (exercise 28).
+    """
+
+    def setUp(self):
+        self.cart = ShoppingCart()
+        self.apple = Product("Apple", 2)
+        self.banana = Product("Banana", 3)
+
+    def test_add_product_new_item(self):
+        self.cart.add_product(self.apple, 2)
+        self.assertEqual(len(self.cart.items), 1)
+        self.assertEqual(self.cart.items[0]["quantity"], 2)
+
+    def test_add_product_existing_item(self):
+        self.cart.add_product(self.apple, 1)
+        self.cart.add_product(self.apple, 3)
+        self.assertEqual(self.cart.items[0]["quantity"], 4)
+
+    def test_remove_product_decrease_quantity(self):
+        self.cart.add_product(self.apple, 5)
+        self.cart.remove_product(self.apple, 2)
+        self.assertEqual(self.cart.items[0]["quantity"], 3)
+
+    def test_remove_product_remove_item(self):
+        self.cart.add_product(self.apple, 2)
+        self.cart.remove_product(self.apple, 2)
+        self.assertEqual(len(self.cart.items), 0)
+
+    def test_view_product_output(self):
+        msg = self.apple.view_product()
+        self.assertEqual(msg, "The product Apple has a price of 2")
+
+    def test_checkout_total(self):
+        self.cart.add_product(self.apple, 2)
+        self.cart.add_product(self.banana, 3)
+        total = sum(
+            item["product"].price * item["quantity"] for item in self.cart.items
+        )
+        self.assertEqual(total, 13)
