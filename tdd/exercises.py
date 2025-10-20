@@ -20,5 +20,7 @@ write your assertions relating to the exact requirements
 def fizzbuzz(num):
     if num % 3 == 0:
         return "Fizz"
+    elif num % 5 == 0:
+        return "Buzz"
 
     return str(num)
