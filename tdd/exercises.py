@@ -18,11 +18,15 @@ write your assertions relating to the exact requirements
 4. For numbers that are multiples of both three and five return “FizzBuzz”.
 """
 def fizzbuzz(num):
-    if num % 3 == 0 and num % 5 == 0:
-        return "FizzBuzz"
-    elif num % 3 == 0:
-        return "Fizz"
-    elif num % 5 == 0:
-        return "Buzz"
+    output = ""
 
-    return str(num)
+    if num % 3 == 0:
+        output += "Fizz"
+
+    if num % 5 == 0:
+        output += "Buzz"
+
+    if output == "":
+        output = str(num)
+
+    return output
