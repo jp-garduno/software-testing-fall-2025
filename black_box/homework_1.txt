@@ -3,18 +3,87 @@ Equivalence Partitioning
 1. Function that validates credit card numbers.
    - Valid card numbers: Length between 13 and 16 digits, containing only numeric digits.
 
+      - card_number = '1234567891234' -> True
+      - card_number = '123456789123' -> False
+      - card_number = '12345678912345' -> False
+      - card_number = 'hola567891234' -> False
+      - card_number = '123__67891234' -> False
+      - card_number = '' -> False
+      - card_number = null -> error
+      - card_number = 1234567891234 -> error
+      - card_number = True -> error
+
 2. Function that validates dates.
    - Valid years: Between 1900 and 2100.
    - Valid months: Between 1 and 12.
    - Valid days: Between 1 and 31.
 
+      - year = 1950, month = 5, day = 20 -> True
+      - year = 1900, month = 1, day = 1 -> True
+      - year = 2100, month = 12, day = 31 -> True
+      - year = 2000, month = 2, day = 29 -> True
+      - year = 1899, month = 5, day = 20 -> False
+      - year = 2101, month = 5, day = 20 -> False
+      - year = 2000, month = 0, day = 20 -> False
+      - year = 2000, month = 13, day = 20 -> False
+      - year = 2000, month = -7, day = 20 -> False
+      - year = 2000, month = 6, day = 0 -> False
+      - year = 2000, month = 6, day = 32 -> False
+      - year = 2000, month = 6, day = -12 -> False
+      - year = '2000', month = 6, day = 12 -> error
+      - year = 2000, month = '6', day = 12 -> error
+      - year = 2000, month = 6, day = '12' -> error
+      - year = null, month = 6, day = 12 -> error
+      - year = 2000, month = null, day = 12 -> error
+      - year = 2000, month = 6, day = null -> error
+      - year = True, month = 6, day = 12 -> error
+      - year = 2000, month = True, day = 12 -> error
+      - year = 2000, month = 6, day = null -> error
+
 3. Function that checks the eligibility of a passenger to book a flight.
    - Eligible ages: Between 18 and 65.
    - Frequent flyers: True or False.
 
+      - age = 20, frequent_flyer = True -> True
+      - age = 20, frequent_flyer = False -> True
+      - age = 20, frequent_flyer = null -> error
+      - age = 18, frequent_flyer = True -> True
+      - age = 18, frequent_flyer = False -> True
+      - age = 18, frequent_flyer = null -> error
+      - age = 65, frequent_flyer = True -> True
+      - age = 65, frequent_flyer = False -> True
+      - age = 65, frequent_flyer = null -> error
+      - age = 17, frequent_flyer = True -> False
+      - age = 17, frequent_flyer = False -> False
+      - age = 17, frequent_flyer = null -> error
+      - age = 66, frequent_flyer = True -> False
+      - age = 66, frequent_flyer = False -> False
+      - age = 66, frequent_flyer = null -> error
+      - age = -20, frequent_flyer = True -> False
+      - age = -20, frequent_flyer = False -> False
+      - age = -20, frequent_flyer = null -> error
+      - age = 0, frequent_flyer = True -> False
+      - age = 0, frequent_flyer = False -> False
+      - age = 0, frequent_flyer = null -> error
+      - age = "20", frequent_flyer = True → error
+      - age = 30, frequent_flyer = "yes" -> error
+      - age = 30, frequent_flyer = 1 → error
+      - age = null, frequent_flyer = True -> error
+      - age = True, frequent_flyer = False -> error
+
 4. Function that validates URLs.
    - Valid URLs: Length less than or equal to 255, starting with "http://" or "https://".
 
+      - url = 'http://www.google.com' -> True
+      - url = 'https://www.example.com/page?query=test' -> True
+      - url = 'https://' + 'a' * 247 + '.com' -> True (Length 255)
+      - url = 'ftp://www.example.com' -> False
+      - url = 'www.example.com' -> False
+      - url = 'http://' + 'a' * 248 + '.com' -> False (Length 256)
+      - url = '' -> False
+      - url = null -> error
+      - url = 123 -> error
+      - url = True -> error
 
 Boundary Value Analysis
 
@@ -26,6 +95,24 @@ Boundary Value Analysis
    - If the income is greater than $60,000 and the credit score is above 750, the person is eligible for a premium loan.
    - If the income is greater than $60,000 and the credit score is between 700 and 750 (inclusive), the person is eligible for a standard loan.
 
+      - income = 29999, credit_score = 701 → Not Eligible
+      - income = 29999, credit_score = 750 → Not Eligible
+      - income = 30000, credit_score = 699 → Secured Loan
+      - income = 30000, credit_score = 700 → Secured Loan
+      - income = 30000, credit_score = 701 → Standard Loan
+      - income = 30001, credit_score = 700 → Secured Loan
+      - income = 30001, credit_score = 701 → Standard Loan
+      - income = 59999, credit_score = 700 → Secured Loan
+      - income = 59999, credit_score = 701 → Standard Loan
+      - income = 60000, credit_score = 700 → Secured Loan
+      - income = 60000, credit_score = 701 → Standard Loan
+      - income = 60001, credit_score = 749 → Standard Loan
+      - income = 60000, credit_score = 750 → Secured Loan
+      - income = 60001, credit_score = 751 → Premium Loan
+      - income = 60001, credit_score = 700 → Standard Loan
+      - income = 60001, credit_score = 750 → Standard Loan
+      - income = 60001, credit_score = 751 → Premium Loan
+
 2. Function that determines the category of a product in an e-commerce system based on its price.
    The product categories and pricing rules are as follows:
    - Category A: Products priced between $10 and $50 (inclusive).
@@ -33,12 +120,36 @@ Boundary Value Analysis
    - Category C: Products priced between $101 and $200 (inclusive).
    - Category D: Products priced above $200.
 
+      - price = 9 -> NA
+      - price = 10 -> Category A
+      - price = 11 -> Category A
+      - price = 49 -> Category A
+      - price = 50 -> Category A
+      - price = 51 -> Category B
+      - price = 99 -> Category B
+      - price = 100 -> Category B
+      - price = 101 -> Category C
+      - price = 200 -> Category C
+      - price = 201 -> Category D
+
 3. Function that calculates the cost of shipping for packages based on their weight and dimensions.
    The shipping cost rules are as follows:
    - If the weight of the package is less than or equal to 1 kg and the dimensions (length, width, and height) are each less than or equal to 10 cm, the cost is $5.
    - If the weight is between 1 and 5 kg (inclusive) and the dimensions are each between 11 and 30 cm (inclusive), the cost is $10.
    - If the weight is greater than 5 kg or any of the dimensions is greater than 30 cm, the cost is $20.
 
+      # There is an error in this one because the first point says "<= 1" and the second point says 1 (inclusive). I'll use 1 as part of the first point only
+      # Also I don't fully understand what happens if, for example, the weight is less than 1 but the dimensions are greater than 30
+      - weight = 0.9, dimensions = 9 -> 5
+      - weight = 0.9, dimensions = 10 -> 5
+      - weight = 0.9, dimensions = 11 -> 5
+      - weight = 1, dimensions = 9 -> 5
+      - weight = 1, dimensions = 10 -> 5
+      - weight = 1, dimensions = 11 -> 5
+      - weight = 1.1, dimensions = 11 -> 10
+      - weight = 4.9, dimensions = 30 -> 10
+      - weight = 5, dimensions = 30 -> 10
+      - weight = 5.1, dimensions = 31 -> 20
 
 Decision Table
 
@@ -48,12 +159,30 @@ Decision Table
    - Weather recommendation "Low temperature. Don't forget your jacket!" for temperature < 0 and any humidity.
    - No weather recommendation for any other temperature and humidity combination.
 
+   |=================|=================|===========================================================================================|
+   |      temp       |     humidity    |  Recommendation                                                                           |
+   |=================|=================|===========================================================================================|
+   |      > 30       |     > 70        |  "High temperature and humidity. Stay hydrated." for temperature > 30 and humidity > 70"  |
+   |      > 30       |     <= 70       |  No rec                                                                                   |
+   |      < 0        |     any         |  "Low temperature. Don't forget your jacket!" for temperature < 0 and any humidity."      |
+   |  0 <= x <= 30   |     any         |  No rec                                                                                   |
+   |=================|=================|===========================================================================================|
+
 2. Create the decision table for a system that authenticates users based on their username and password.
    The rules are:
    - Returns "Admin" for username "admin" and password "admin123".
    - Returns "User" for any other username with at least 5 characters and password with at least 8 characters.
    - Returns "Invalid" if the username or password lenghts are not met.
 
+      |=====================|========================|======================|======================|====================|
+      | username == "admin" | password == "admin123" | username length >= 5 | password length >= 8 |      Result        |
+      |=====================|========================|======================|======================|====================|
+      |        Yes          |        Yes             |        Yes           |        Yes           |       Admin        |
+      |        No           |        N/A             |        Yes           |        Yes           |       User         |
+      |        Yes          |        No              |        Yes           |        Yes           |       User         |
+      |       Any           |        Any             |        No            |        Any           |      Invalid       |
+      |       Any           |        Any             |        Any           |        No            |      Invalid       |
+      |=====================|========================|======================|======================|====================|
 
 State Transition
 
@@ -62,7 +191,19 @@ State Transition
    - Goes from Ready to Dispensing when inserting a coin and asks you to select the drink.
    - After selecting the drink, thanks you and goes from Dispensing to Ready.
 
+   [Ready] --> (Insert Coin) --> [Dispensing] --> (Select drink) --> (Greets user)
+      ^                                                                     |
+      |---------------------------------------------------------------------|
+
 2. Draw the state transition diagram for an elevator system.
    - The states are "Idle", "Moving Up" and "Moving Down".
    - The elevator can only move up or down if the state is in "Idle" state.
    - The elevator can only stop if the state is either "Moving Down" or "Moving Up"
+
+   [Idle] --> (Go up) --> [Moving Up] --> (Stop)
+      ^                                      |
+      |--------------------------------------|
+
+   [Idle] --> (Go down) --> [Moving down] --> (Stop)
+      ^                                      |
+      |--------------------------------------|
